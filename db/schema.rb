@@ -22,12 +22,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_024222) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "book_id_id", null: false
-    t.integer "tag_id_id", null: false
+    t.integer "book_id", null: false
+    t.integer "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id_id"], name: "index_taggings_on_book_id_id"
-    t.index ["tag_id_id"], name: "index_taggings_on_tag_id_id"
+    t.index ["book_id"], name: "index_taggings_on_book_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
