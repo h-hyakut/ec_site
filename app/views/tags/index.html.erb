@@ -6,7 +6,7 @@
   <% @tags.each do |tag| %>
     <%= render tag %>
   <p>
-    <%= link_to "編集", edit_tag_path %>
+    <%= link_to "編集", edit_tag_path(tag) %>
     <%= link_to "削除", tag, data: {turbo_method: :delete} %>
   </p>
   <% end %>
