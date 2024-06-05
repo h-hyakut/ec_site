@@ -36,6 +36,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_024222) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "taggings", "book_ids"
-  add_foreign_key "taggings", "tag_ids"
+  add_foreign_key "taggings", "books"
+  add_foreign_key "taggings", "tags"
 end
