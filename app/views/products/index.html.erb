@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+<p id = "notice"><%= notice %></p>
+
+<h1>Books</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>📖Title</th>
+    <th>👤Author</th>
+    <th>⌚Publushed_on</th>
+    <th>📚Showing</th>
+    <th>💴Price</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td>[<%= link_to book.title, product_path(book) %>]</td>
+        <td><%= book.author %></td>
+        <td><%= book.publushed_on %></td>
+        <td><%= book.showing %></td>
+        <td><%= book.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
