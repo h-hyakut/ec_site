@@ -7,6 +7,6 @@
   <%= @book.tags.map(&:name).join(', ') %>
 </p>
 
-<div> 
-  <%= link_to "Back to books", products_path %>
-</div>
+<p><%= button_to "Order Page", new_order_path(@book), method: :get %></p>
+
+<p><%= link_to "Back to books", products_path %></p>

@@ -6,10 +6,10 @@
   <% @tags.each do |tag| %>
     <%= render tag %>
   <p>
-    <%= link_to "編集", edit_tag_path(tag) %>
-    <%= link_to "削除", tag, data: {turbo_method: :delete} %>
+    <%= link_to "EDIT", edit_tag_path(tag) %>
+    <%= link_to "DELETE", tag, data: {turbo_method: :delete} %>
   </p>
   <% end %>
 </div>
 
-<%= link_to "新規作成", new_tag_path %>
+<%= link_to "Create a new [item].", new_tag_path %>

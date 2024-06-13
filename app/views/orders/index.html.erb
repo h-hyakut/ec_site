@@ -1,0 +1,9 @@
+<h1>All Orders</h1>
+
+<% @orders.each do |order| %>
+  <div>
+    <p><strong>Order ID:</strong> <%= order.id %></p>
+    <p><strong>Customer Name:</strong> <%= order.customer_name %></p>
+    <p><strong>Shipping Address:</strong> <%= order.shipping_address %></p>
+  </div>
+<% end %>
