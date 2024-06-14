@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
+<h2>Book details</h2>
+
 <style>
 .book-info p {
     margin: 5px 0; 
@@ -20,10 +22,11 @@
 
 </style>
 
+
 <div class="book-info">
   <p><strong>.*★📖Title*.⁺:</strong> <%= @book.title %></p>
   <p><strong>👤Author:</strong> <%= @book.author %></p>
-  <p><strong>⌚Publushed on:</strong> <%= @book.publushed_on %></p>
+  <p><strong>⌚Publushed on</strong> <%= @book.publushed_on %></p>
   <p><strong>📚Showing:</strong> <%= @book.showing %></p>
   <p><strong>💴Price:</strong> <%= @book.price %></p>
   <p><strong>タグ:</strong> <%= @book.tags.map(&:name).join(', ') %></p>

@@ -12,6 +12,23 @@
     </div>
   <% end %>
 
+<style>
+.link {
+  background-color: #FFF176; /* パステルの黄色 (#FFF176) */
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; 
+  border: none;
+  font-size: 15px;
+}
+
+.link:hover {
+  background-color: #FFEB3B; 
+  /* ホバー時の色変更 */
+}
+</style>
+
 <strong>📖Title:<%= @book.title %></strong>
 
   <div class="field">
@@ -28,7 +45,9 @@
     <%= form.hidden_field :book_id, value: @book.id %>
   </div>
 
+  <p>
   <div class="actions">
-    <%= form.submit "Proceed to the next step." %>
+    <%= form.submit "Proceed to the next step.", class:"link" %>
   </div>
+  </p>
 <% end %>
