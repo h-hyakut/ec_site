@@ -1,23 +1,33 @@
-<p style="color: green"><%= notice %></p>
 <p id = "notice"><%= notice %></p>
+<p style="color: green"><%= notice %></p>
+
+
+<style>
+  th, td {
+    padding: 8px; 
+    # /* セルの余白を設定 */
+    text-align: center; 
+    # /* 文字を中央揃えにする */
+  }
+</style>
 
 <h1>Books</h1>
 
 <table>
   <thead>
-  <tr>
-    <th>📖Title</th>
-    <th>👤Author</th>
-    <th>⌚Publushed_on</th>
-    <th>📚Showing</th>
-    <th>💴Price</th>
-  </tr>
+    <tr>
+      <th>.*★📖Title*.⁺:</th>
+      <th>👤Author</th>
+      <th>⌚Publushed on</th>
+      <th>📚Showing</th>
+      <th>💴Price</th>
+    </tr>
   </thead>
 
   <tbody>
     <% @books.each do |book| %>
       <tr>
-        <td>[<%= link_to book.title, product_path(book) %>]</td>
+        <td><%= link_to book.title, product_path(book) %></td>
         <td><%= book.author %></td>
         <td><%= book.publushed_on %></td>
         <td><%= book.showing %></td>

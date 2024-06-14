@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :taggings
   resources :books
   resources :tags
-  resources :products
+  resources :products, only: [:index, :show]
   resources :orders
 end

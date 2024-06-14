@@ -3,9 +3,10 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
   end
+
   def new
     @order = Order.new
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:book_id])
   end
 
   def create
@@ -21,7 +22,9 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    @books = Book.find(params[:id])
+    @order = Order.new(order_params)
+    # @books = Book.find(order_params[:book_id])
+    @books = Book.find(@order.book_id)
   end
 
   def complete
