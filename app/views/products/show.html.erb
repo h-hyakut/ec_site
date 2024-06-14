@@ -1,12 +1,35 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @book %>
+<style>
+.book-info p {
+    margin: 5px 0; 
+  }
 
-<p>
-  <strong>タグ</strong>
-  <%= @book.tags.map(&:name).join(', ') %>
-</p>
+.link {
+  background-color: #FFF176; /* パステルの黄色 (#FFF176) */
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; 
+}
 
-<p><%= button_to "Order Page", new_order_path(book_id: @book), method: :get %></p>
+.link:hover {
+  background-color: #FFEB3B; 
+  /* ホバー時の色変更 */
+}
+
+</style>
+
+<div class="book-info">
+  <p><strong>.*★📖Title*.⁺:</strong> <%= @book.title %></p>
+  <p><strong>👤Author:</strong> <%= @book.author %></p>
+  <p><strong>⌚Publushed on:</strong> <%= @book.publushed_on %></p>
+  <p><strong>📚Showing:</strong> <%= @book.showing %></p>
+  <p><strong>💴Price:</strong> <%= @book.price %></p>
+  <p><strong>タグ:</strong> <%= @book.tags.map(&:name).join(', ') %></p>
+</div>
+
+
+<p><%= link_to "Order", new_order_path(book_id: @book.id), class:"link" %></p>
 
 <p><%= link_to "Back to books", products_path %></p>

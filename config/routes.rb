@@ -4,7 +4,13 @@ Rails.application.routes.draw do
 
   resources :taggings
   resources :books
-  resources :tags
-  resources :products, only: [:index, :show]
-  resources :orders
+  resources :tags, except: :show
+  resources :products, only: [:index, :show] 
+
+  resources :orders, only: [:new, :create] do
+    collection do
+      get :confirm
+      get :complete
+    end
+  end
 end

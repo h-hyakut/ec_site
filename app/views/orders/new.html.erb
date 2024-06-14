@@ -1,25 +1,31 @@
-<h1>Product order.</h1>
+<h1>Order🐧</h1>
 
-<%= form_with(model: @order, url: orders_confirm_path, local: true) do |form| %>
+<%= form_with(model: @order, local: true, url: confirm_orders_path, method: :get) do |form| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
       <ul>
-        <% @order.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% @order.errors.each do |error| %>
+          <li><%= error.full_message%></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
+<strong>📖Title:<%= @book.title %></strong>
+
   <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity, min: 1 %>
+    <%= form.label :count %>
+    <%= form.text_field :count %>
   </div>
 
   <div class="field">
-    <%= form.label :shipping_address %>
-    <%= form.text_area :shipping_address %>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :book_id, value: @book.id %>
   </div>
 
   <div class="actions">

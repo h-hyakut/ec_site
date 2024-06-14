@@ -1,0 +1,57 @@
+<h1>☑Confirmation</h1>
+  <p>🐱<[Please, confirm your order.]</p>
+
+<style>
+.link {
+  background-color: #B2EBF2; /* パステルの黄色 (#FFF176) */
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; 
+  border: none;
+}
+
+.link:hover {
+  background-color:  #80DEEA;
+  /* ホバー時の色変更 */
+}
+</style>
+  
+
+<%= form_with(model: @order, local: true) do |form| %>
+  <% if @order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+        <ul>
+          <% @order.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class="field">
+    <strong><%= form.label :book_id %>:</strong>
+    <%= @book.title %>
+    <%= form.hidden_field :book_id, value: @book.id %>
+  </div>
+
+  <div class="field">
+    <strong><%= form.label :count %>:</strong>
+    <%= @order.count %>
+    <%= form.hidden_field :count %>
+  </div>
+
+  <div class="field">
+    <strong><%= form.label :address %>:</strong>
+    <%= @order.address %>
+    <%= form.hidden_field :address %>
+  </div>
+
+  <p>
+  <div class="actions">
+    <%= form.submit "Order", class:"link" %>
+  </div>
+  </p>
+<% end %>

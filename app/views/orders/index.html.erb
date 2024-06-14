@@ -2,8 +2,8 @@
 
 <% @orders.each do |order| %>
   <div>
-    <p><strong>Order ID:</strong> <%= order.id %></p>
-    <p><strong>Customer Name:</strong> <%= order.customer_name %></p>
-    <p><strong>Shipping Address:</strong> <%= order.shipping_address %></p>
+  <p><strong>Count</strong> <%= order.count %></p>
+  <p><strong>Address:</strong> <%= order.address %></p>
+  <p><strong>Book ID:</strong> <%= order.id %></p>
   </div>
 <% end %>
