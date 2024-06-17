@@ -9,6 +9,7 @@
   color: black; 
   border-radius: 5px; 
   border: none;
+  font-size: 15px;
 }
 
 .link:hover {
@@ -32,26 +33,26 @@
   <% end %>
 
   <div class="field">
-    <strong><%= form.label :book_id %>:</strong>
+    <strong><%= form.label :📖book_id %>:</strong>
     <%= @book.title %>
     <%= form.hidden_field :book_id, value: @book.id %>
   </div>
 
   <div class="field">
-    <strong><%= form.label :count %>:</strong>
+    <strong><%= form.label :・count %>:</strong>
     <%= @order.count %>
     <%= form.hidden_field :count %>
   </div>
 
   <div class="field">
-    <strong><%= form.label :address %>:</strong>
+    <strong><%= form.label :・address %>:</strong>
     <%= @order.address %>
     <%= form.hidden_field :address %>
   </div>
 
   <p>
   <div class="actions">
-    <%= form.submit "Order", class:"link" %>
+    <%= form.submit "Confirm your order.", class:"link" %>
   </div>
   </p>
 <% end %>

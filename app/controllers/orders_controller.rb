@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
       if @order.save
-        redirect_to complete_orders_path(@order), notice: "Your order has been completed.🛍★"
+        redirect_to complete_orders_path
       else
         render "confirm"
     end
