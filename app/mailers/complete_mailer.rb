@@ -5,9 +5,8 @@ class CompleteMailer < ApplicationMailer
   #
   #   en.complete_mailer.complete_mail.subject
   #
-  def complete_mail
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def complete_mail(complete)
+    @complete = complete
+    mail to: complete.alert_mail_address, subject: "商品の注文が完了しました！"
   end
 end
