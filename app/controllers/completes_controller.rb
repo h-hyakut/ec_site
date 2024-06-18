@@ -1,3 +1,5 @@
+class CompletesController < ApplicationController
+
 def create
   @complete = Complete.new(complete_params)
 
