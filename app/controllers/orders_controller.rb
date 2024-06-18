@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
       if @order.save
+
         redirect_to complete_orders_path
       else
         render "confirm"
@@ -26,6 +27,7 @@ class OrdersController < ApplicationController
 
 
   def complete
+    CompleteMailer.complete_mail(current_user).deliver_now
   end
 
   private

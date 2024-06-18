@@ -7,6 +7,6 @@ class CompleteMailer < ApplicationMailer
   #
   def complete_mail(complete)
     @complete = complete
-    mail to: complete.alert_mail_address, subject: "商品の注文が完了しました！"
+    mail to: complete.email, subject: "商品の注文が完了しました！"
   end
 end
