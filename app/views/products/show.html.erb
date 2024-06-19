@@ -27,7 +27,13 @@
   <p><strong>.*★📖Title*.⁺:</strong> <%= @book.title %></p>
   <p><strong>👤Author:</strong> <%= @book.author %></p>
   <p><strong>⌚Publushed on</strong> <%= @book.publushed_on %></p>
-  <p><strong>📚Status:</strong> <%= @book.status %></p>
+  <p><strong>📚Status:</strong>
+    <% if @book.on_sale? %>
+      <span style="color: green;">On sale</span>
+    <% elsif @book.sold_out? %>
+      <span style="color: red;">Sold out</span>
+    <% end %>
+  </p>
   <p><strong>💴Price:</strong> <%= @book.price %></p>
   <p><strong>タグ:</strong> <%= @book.tags.map(&:name).join(', ') %></p>
 </div>

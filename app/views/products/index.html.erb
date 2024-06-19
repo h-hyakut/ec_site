@@ -33,7 +33,13 @@ th, td {
         <td class="title-header"><%= link_to book.title, product_path(book) %></td>
         <td><%= book.author %></td>
         <td><%= book.publushed_on %></td>
-        <td><%= book.status %></td>
+        <td>
+          <% if book.on_sale? %>
+            <span style="color: green;">On sale</span>
+          <% elsif book.sold_out? %>
+            <span style="color: red;">Sold out</span>
+          <% end %>
+        </td>
         <td><%= book.price %></td>
       </tr>
     <% end %>
