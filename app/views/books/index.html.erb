@@ -1,4 +1,5 @@
 <p style="color: green"><%= notice %></p>
+
 <style>
 .button {
   font-size: 15px;
@@ -10,7 +11,8 @@
 <div id="books">
   <% @books.each do |book| %>
     <%= render book %>
-    <p><%= button_to "🔍Show this book", book, method: :get, class:"button" %>
+    <p>
+    <%= button_to "🔍Show this book", book, method: :get, class:"button" %>
     </p>
   <% end %>
 </div>

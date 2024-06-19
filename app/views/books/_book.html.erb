@@ -1,26 +1,28 @@
 <div id="<%= dom_id book %>">
   <p>
-    <strong>Title:</strong>
+    <strong>.*★📖Title*.⁺:</strong>
     <%= book.title %>
   </p>
 
   <p>
-    <strong>Author:</strong>
+    <strong>👤Author</strong>
     <%= book.author %>
   </p>
 
   <p>
-    <strong>Publushed on</strong>
+    <strong>⌚Publushed on</strong>
     <%= book.publushed_on %>
   </p>
 
-  <p>
-    <strong>Showing:</strong>
-    <%= book.showing %>
+  <% if book.on_sale? %>
+    <p><strong>📚Status:</strong> <span style="color: green;">On sale</span></p>
+  <% elsif book.sold_out? %>
+    <p><strong>📚Status:</strong><span style="color: red;">Sold out</span></p>
+  <% end %>
   </p>
 
   <p>
-    <strong>Price:</strong>
+    <strong>💴Price:</strong>
     <%= book.price %>
   </p>
 

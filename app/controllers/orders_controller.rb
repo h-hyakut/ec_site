@@ -18,7 +18,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
       if @order.save
-
+        @book = Book.find(order_params[:book_id])
+        @book.sold_out!
         redirect_to complete_orders_path
       else
         render "confirm"
@@ -27,12 +28,15 @@ class OrdersController < ApplicationController
 
 
   def complete
-    CompleteMailer.complete_mail(current_user).deliver_now
+    CompleteMailer.complete_mail(current_user).deliver
   end
 
+  # def update
+
+  # end
   private
 
   def order_params
-    params.require(:order).permit(:count, :address, :book_id)
+    params.require(:order).permit(:count, :address, :book_id, :status)
   end
 end

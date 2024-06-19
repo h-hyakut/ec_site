@@ -8,7 +8,7 @@ def create
       CompleteMailer.complete_mail(@complete).raise_delivery_errors
 
       format.html { redirect_to @complete,
-      notice: "To do task was successfully created." }
+      notice: "Your order has been successfully completed." }
       format.json {render :show, status: :created, location: @complete }
     else
       format.html { render :new }

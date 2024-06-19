@@ -21,7 +21,7 @@ th, td {
       <th>.*★📖Title*.⁺:</th>
       <th>👤Author</th>
       <th>⌚Publushed on</th>
-      <th>📚Showing</th>
+      <th>📚Status</th>
       <th>💴Price</th>
       <th colspan="3"></th>
     </tr>
@@ -33,7 +33,7 @@ th, td {
         <td class="title-header"><%= link_to book.title, product_path(book) %></td>
         <td><%= book.author %></td>
         <td><%= book.publushed_on %></td>
-        <td><%= book.showing %></td>
+        <td><%= book.status %></td>
         <td><%= book.price %></td>
       </tr>
     <% end %>
