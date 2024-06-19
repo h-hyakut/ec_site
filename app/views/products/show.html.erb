@@ -39,6 +39,10 @@
 </div>
 
 
-<p><%= link_to "Order", new_order_path(book_id: @book.id), class:"link" %></p>
+<% if @book.on_sale? %>
+  <p><%= link_to "Order", new_order_path(book_id: @book.id), class:"link" %></p>
+<% else %>
+  <% flash.now[:alert] = "This item is currently sold out and unavailable for purchase...🙇" %>
+<% end %>
 
 <p><%= link_to "Back to books", products_path %></p>

@@ -12,7 +12,7 @@ def create
       format.json {render :show, status: :created, location: @complete }
     else
       format.html { render :new }
-      format.json { render json: @complete.erros,
+      format.json { render json: @complete.errors,
       status: :unprocessable_entity }
     end
   end
