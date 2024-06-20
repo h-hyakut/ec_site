@@ -7,7 +7,7 @@
     margin: 5px 0; 
   }
 
-.link {
+.order {
   background-color: #FFF176; /* パステルの黄色 (#FFF176) */
   padding: 10px 20px; /* パディングを適切に設定 */
   text-decoration: none; /* 下線を削除 */
@@ -15,11 +15,27 @@
   border-radius: 5px; 
 }
 
-.link:hover {
+.order:hover {
   background-color: #FFEB3B; 
   /* ホバー時の色変更 */
 }
 
+.add {
+  background-color: #FFC896; /* パステルの黄色 (#FFF176) */
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; 
+}
+
+.add:hover {
+  background-color: #FFB680; 
+  /* ホバー時の色変更 */
+}
+
+p {
+  margin-bottom: 30px;
+}
 </style>
 
 
@@ -38,11 +54,22 @@
   <p><strong>タグ:</strong> <%= @book.tags.map(&:name).join(', ') %></p>
 </div>
 
-
+<p>
 <% if @book.on_sale? %>
-  <p><%= link_to "Order", new_order_path(book_id: @book.id), class:"link" %></p>
+  <%= link_to "Order", new_order_path(book_id: @book.id), class:"order" %>
 <% else %>
   <% flash.now[:alert] = "This item is currently sold out and unavailable for purchase...🙇" %>
 <% end %>
+</p>
+
+
+<p>
+<% if current_cart?(product, @cart) %>
+    <%= "You have added it to your cart." %>
+<% else %>
+    <%= link_to "Add to cart🛒=3", line_items_path(book_id: book.id),
+      method: :post, data: {turbo: true}, class: "btn btn-default add" %>
+<% end %>
+</p>
 
 <p><%= link_to "Back to books", products_path %></p>

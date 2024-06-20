@@ -13,6 +13,20 @@ th, td {
 .title-header {
   text-align: left;
 }
+
+.add {
+  background-color: #FFC896; /* パステルの黄色 (#FFF176) */
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; 
+}
+
+.add:hover {
+  background-color: #FFB680; 
+  /* ホバー時の色変更 */
+}
+
 </style>
 
 <table>
@@ -45,4 +59,8 @@ th, td {
     <% end %>
   </tbody>
 </table>
+<br>
+<% if session[:cart_id] %>
+  <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
+<% end %>
 
