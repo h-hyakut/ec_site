@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :current_cart
+
   def after_sign_in_path_for(resources)
     session[:user_id] = current_user.id if current_user.present?
     mypage_path

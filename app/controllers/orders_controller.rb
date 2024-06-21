@@ -5,27 +5,21 @@ class OrdersController < ApplicationController
   # end 注文一覧を作るときに使うよ
 
   def new
-    if params[:book_id].present?
-      @book = Book.find_by(id: params[:book_id]) #idと関連をつける
-      if @book.sold_out?
-        redirect_to product_path(@book)
-        flash[:alert] = "This item is currently sold out and unavailable for purchase...🙇"
-        return
-      end
-    else
-      redirect_to products_path
-      flash[:alert] = "Book ID is missing."
-      return
-    end
-
-    @order = Order.new
+     @order = Order.new
+     @books = @current_cart.books
   end
+
+  
     
   def confirm
     @order = Order.new(order_params)
     # @book = Book.find(@order.book_id) #new アクションで設定された @book 変数
     @book = Book.find(order_params[:book_id]) #new アクションで設定された @book 変数
   
+    if @book.sold_out?
+      redirect_to product_path(@book)
+      flash[:alert] = "This item is currently sold out and unavailable for purchase...🙇"
+    end
   end
 
   def create

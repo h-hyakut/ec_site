@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_20_011349) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_21_065853) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -33,6 +33,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_011349) do
     t.string "alert_mail_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "book_id", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_line_items_on_book_id"
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "order_id", null: false
+    t.integer "quantity", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_order_details_on_book_id"
+    t.index ["order_id"], name: "index_order_details_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -75,6 +95,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_011349) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "line_items", "books"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "order_details", "books"
+  add_foreign_key "order_details", "orders"
   add_foreign_key "taggings", "books"
   add_foreign_key "taggings", "tags"
 end

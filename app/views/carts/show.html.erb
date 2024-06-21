@@ -1,16 +1,18 @@
 <style>
-.order {
-  background-color: #FFF176; /* パステルの黄色 (#FFF176) */
+.add {
+  background-color: #FFC896; /* パステルオレンジ (#FFF176) */
   padding: 10px 20px; /* パディングを適切に設定 */
   text-decoration: none; /* 下線を削除 */
   color: black; 
   border-radius: 5px; 
 }
 
-.order:hover {
-  background-color: #FFEB3B; 
+.add:hover {
+  background-color: #FFB680; 
   /* ホバー時の色変更 */
 }
+
+</style>
 </style>
 
 
@@ -40,6 +42,6 @@
 <% if @line_items.count == 0 %>
   <strong>Your shopping cart is empty🛒…</strong>
 <% else %>
-  <%= link_to "Order", new_order_path(@book), class:"order" %>
+  <%= link_to "Add to cart🛒=3", new_order_path, class:"add" %>
 <% end %>
   <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" } %> 

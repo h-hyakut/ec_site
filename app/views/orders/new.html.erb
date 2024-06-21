@@ -29,20 +29,24 @@
 }
 </style>
 
-<strong>📖Title:<%= @book.title %></strong>
+<% @books.each do |book|%>
+<strong>📖Title:<%= book.title %></strong>
 
   <div class="field">
     <%= form.label :・count %>
-    <%= form.text_field :count %>
+    <%= form.text_field :count, name: "counts[]", value: LineItem.find_by(cart_id: @current_cart, book_id: book).quantity %>
   </div>
 
+  
+  <div class="field">
+  <%= form.hidden_field :book_id, value: book.id, name: "book_ids[]" %>
+  </div>
+  
+<% end %>
+  
   <div class="field">
     <%= form.label :・address %>
     <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :book_id, value: @book.id %>
   </div>
 
   <p>
