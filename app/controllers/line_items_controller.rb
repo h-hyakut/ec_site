@@ -1,9 +1,5 @@
 class LineItemsController < ApplicationController
 
-  # def index
-  #   @line_item = LineItem.all
-  # end
-
   def create
     cart = current_cart
     book = Book.find(params[:book_id])
@@ -13,7 +9,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.html { redirect_to products_path, notice: "Item was successfully added to your cart." }
       else
-        format.html { redirect_to products_index_url, notice: "Unprocessable entity." }
+        format.html { redirect_to products_index_url, alert: "Unprocessable entity." }
       end
     end
   end
@@ -27,4 +23,6 @@ class LineItemsController < ApplicationController
   # def book_params
   #     params.require(:book).permit(:title, :author, :published_on, :showing, :price,  :status,: tag_ids [], :quantity)
   # end
+
+  
 end

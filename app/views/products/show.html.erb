@@ -64,12 +64,9 @@ p {
 
 
 <p>
-<% if current_cart?(product, @cart) %>
-    <%= "You have added it to your cart." %>
-<% else %>
-    <%= link_to "Add to cart🛒=3", line_items_path(book_id: book.id),
-      method: :post, data: {turbo: true}, class: "btn btn-default add" %>
-<% end %>
+ <%= link_to "Add to cart🛒=3", line_items_path(book_id: @book.id),
+ data: {"turbo-method": :post}, class: "btn btn-default add" %>
+
 </p>
 
 <p><%= link_to "Back to books", products_path %></p>

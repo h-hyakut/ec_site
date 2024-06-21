@@ -59,7 +59,9 @@ th, td {
     <% end %>
   </tbody>
 </table>
+
 <br>
+
 <% if session[:cart_id] %>
   <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
 <% end %>

@@ -1,3 +1,20 @@
+<style>
+.order {
+  background-color: #FFF176; /* パステルの黄色 (#FFF176) */
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; 
+}
+
+.order:hover {
+  background-color: #FFEB3B; 
+  /* ホバー時の色変更 */
+}
+</style>
+
+
+
 <h1>Cart🛒</h1>
 
 <% @line_items.each do |line_item| %>
@@ -6,8 +23,8 @@
     <p><%= book.title %></p>
     <p><%= line_item.quantity %>items</p>
     <p>
-      <%= line_item.total_price %>
-      <span>￥(Including tax)</span>
+      ￥<%= line_item.item_total_price %>
+      <span>(Including tax)</span>
     </p>
   </div>
 <% end %>
@@ -21,5 +38,8 @@
 </div>
 
 <% if @line_items.count == 0 %>
-<strong>Your shopping cart is empty🛒…</strong>
+  <strong>Your shopping cart is empty🛒…</strong>
+<% else %>
+  <%= link_to "Order", new_order_path(@book), class:"order" %>
 <% end %>
+  <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" } %> 

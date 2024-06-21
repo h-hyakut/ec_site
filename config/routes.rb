@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   
   resources :line_items, only: [:create, :destroy]
-  resources :carts, only: [:show]
+  resources :carts, only: [:show, :destroy]
   resources :quentity
 
 end
