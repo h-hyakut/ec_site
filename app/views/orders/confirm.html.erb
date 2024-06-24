@@ -19,7 +19,7 @@
 </style>
   
 
-<%= form_with(model: @order, local: true) do |form| %>
+<%= form_with(model: @order, local: true, url: complete_orders_path, method: :get) do |form| %>
   <% if @order.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@order.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -34,13 +34,15 @@
 
 
 <% @books.each do |book|%>
+  <div class="field">
   <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
+  </div>
 <% end %>
 
   <div class="field">
-  <%= form.hidden_field :count, value: @current_cart.total_number %>
+  <%= form.hidden_field :count, value: @current_cart.total_number, name: "order[count][]" %>
   </div>
-  
+
 
   <% @line_items.each do |line_item| %>
     <% book = line_item.book %>

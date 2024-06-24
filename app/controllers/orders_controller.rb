@@ -31,14 +31,20 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-    @book = Book.find(order_params[:book_id])
+    count = order_params[:count].map(&:to_i).sum
+    @order = Order.new(address: order_params[:address], count: count)
+    @books = Book.where(id: order_params[:book_id])
     if @order.save
-        @book.sold_out!
-        OrderDetail.create_items(@order, @current_cart.line_items)
-        redirect_to complete_orders_path(@order), notice: "Order was successfully placed!"
+      if @books.present?
+        @books.each {|book| book.sold_out!}
+      else
+        render "confirm" and return # 注文が保存できなかった場合は確認画面を再表示
+      end
+      
+      OrderDetail.create_items(@order, @current_cart.line_items)
+      redirect_to complete_orders_path(@order), notice: "Order was successfully placed!"
     else
-      render "confirm"  # 注文が保存できなかった場合は確認画面を再表示
+      render "confirm"
     end
   end
 
