@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   
     if @book.sold_out?
       redirect_to product_path(@book)
-      flash[:alert] = "This item is currently sold out and unavailable for purchase...🙇"
+      # flash[:alert] = "This item is currently sold out and unavailable for purchase...🙇"
     end
   end
 

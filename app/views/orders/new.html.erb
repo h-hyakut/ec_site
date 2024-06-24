@@ -42,13 +42,13 @@
   <%= form.hidden_field :book_id, value: book.id, name: "book_ids[]" %>
   </div>
   
-<% end %>
   
   <div class="field">
-    <%= form.label :・address %>
-    <%= form.text_field :address %>
+  <%= form.label :・address %>
+  <%= form.text_field :address %>
   </div>
-
+<% end %>
+  
   <p>
   <div class="actions">
     <%= form.submit "Proceed to the next step.", class:"link" %>
