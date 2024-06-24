@@ -32,27 +32,46 @@
       </div>
   <% end %>
 
-  <div class="field">
-    <strong><%= form.label :📖book_id %>:</strong>
-    <%= @book.title %>
-    <%= form.hidden_field :book_id, value: @book.id %>
-  </div>
+
+<% @books.each do |book|%>
+  <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
+<% end %>
 
   <div class="field">
-    <strong><%= form.label :・count %>:</strong>
-    <%= @order.count %>
-    <%= form.hidden_field :count %>
+  <%= form.hidden_field :count, value: @current_cart.total_number %>
   </div>
+  
+
+  <% @line_items.each do |line_item| %>
+    <% book = line_item.book %>
+    <div>
+      <p>📖<%= book.title %></p>
+      <p>・<%= line_item.quantity %>items</p>
+      <p>
+        💰￥<%= line_item.item_total_price %>
+        <span>(Including tax)</span>
+      </p>
+    </div>
+  <% end %>
+
+  <strong>
+  <div>
+    <p>📚 Quantity of orders: <%= @current_cart.total_number %><span> items</span></p>
+    <p>
+      💴 Total price:￥<%= @current_cart.total_price %>
+      <span>(Including tax)</span>
+    </p>
+  </div>
+  </strong>
 
   <div class="field">
-    <strong><%= form.label :・address %>:</strong>
+    <p><%= form.label :address %></p>
     <%= @order.address %>
     <%= form.hidden_field :address %>
   </div>
-
-  <p>
+      
   <div class="actions">
-    <%= form.submit "Confirm your order.", class:"link" %>
+    <%= form.submit "Confirm your order." %>
   </div>
-  </p>
+
 <% end %>

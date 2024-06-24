@@ -34,21 +34,21 @@
 
   <div class="field">
     <%= form.label :・count %>
-    <%= form.text_field :count, name: "counts[]", value: LineItem.find_by(cart_id: @current_cart, book_id: book).quantity %>
+    <%= form.text_field :count, name: "order[count][]", value: LineItem.find_by(cart_id: @current_cart, book_id: book).quantity %>
   </div>
 
   
   <div class="field">
-  <%= form.hidden_field :book_id, value: book.id, name: "book_ids[]" %>
+  <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
   </div>
   
-  
-  <div class="field">
-  <%= form.label :・address %>
-  <%= form.text_field :address %>
-  </div>
 <% end %>
-  
+<br>
+  <div class="field">
+    <%= form.label :📧address %>
+    <%= form.text_field :address %>
+  </div>
+
   <p>
   <div class="actions">
     <%= form.submit "Proceed to the next step.", class:"link" %>

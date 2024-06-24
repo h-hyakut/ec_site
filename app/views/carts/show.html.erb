@@ -1,4 +1,8 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
 <style>
+
 .add {
   background-color: #FFC896; /* パステルオレンジ (#FFF176) */
   padding: 10px 20px; /* パディングを適切に設定 */
@@ -13,35 +17,39 @@
 }
 
 </style>
-</style>
-
-
-
-<h1>Cart🛒</h1>
-
-<% @line_items.each do |line_item| %>
-  <% book = line_item.book %>
+</head>
+<body>
+  <header>
+    <h1>Cart🛒</h1>
+  </header>
+  <% @line_items.each do |line_item| %>
+    <% book = line_item.book %>
+    <div>
+      <p>📖<%= book.title %></p>
+      <p>・<%= line_item.quantity %>items</p>
+      <p>
+        💰￥<%= line_item.item_total_price %>
+        <span>(Including tax)</span>
+      </p>
+    </div>
+  <% end %>
+  
   <div>
-    <p><%= book.title %></p>
-    <p><%= line_item.quantity %>items</p>
+    <p>📚 Quantity of orders: <%= @current_cart.total_number %><span> items</span></p>
     <p>
-      ￥<%= line_item.item_total_price %>
+      💴 Total price:￥<%= @current_cart.total_price %>
       <span>(Including tax)</span>
     </p>
   </div>
-<% end %>
+  
+  <% if @line_items.count == 0 %>
+    <strong>Your shopping cart is empty🛒…</strong>
+  <% else %>
+    <%= link_to "Order🛒=3", new_order_path, class:"add" %>
+  <% end %>
+    <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" } %> 
+  
+</body>
+</html>
 
-<div>
-  <p>📚 Quantity of orders: <%= @current_cart.total_number %><span> items</span></p>
-  <p>
-    💴 Total price:￥<%= @current_cart.total_price %>
-    <span>(Including tax)</span>
-  </p>
-</div>
 
-<% if @line_items.count == 0 %>
-  <strong>Your shopping cart is empty🛒…</strong>
-<% else %>
-  <%= link_to "Add to cart🛒=3", new_order_path, class:"add" %>
-<% end %>
-  <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" } %> 
