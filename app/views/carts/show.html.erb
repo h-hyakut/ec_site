@@ -26,7 +26,7 @@
     <% book = line_item.book %>
     <div>
       <p>📖<%= book.title %></p>
-      <p>・<%= line_item.quantity %>items</p>
+      <p>◆<%= line_item.quantity %>items</p>
       <p>
         💰￥<%= line_item.item_total_price %>
         <span>(Including tax)</span>
@@ -41,13 +41,14 @@
       <span>(Including tax)</span>
     </p>
   </div>
-  
+
+    
   <% if @line_items.count == 0 %>
     <strong>Your shopping cart is empty🛒…</strong>
   <% else %>
     <%= link_to "Order🛒=3", new_order_path, class:"add" %>
-  <% end %>
     <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" } %> 
+  <% end %>
   
 </body>
 </html>

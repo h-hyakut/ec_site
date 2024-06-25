@@ -1,8 +1,7 @@
-<p style="color: green"><%= notice %></p>
-
 <style>
 .button {
   font-size: 15px;
+  background-color: rgb(255, 153, 153);
 }
 </style>
 
@@ -17,5 +16,7 @@
   <%= link_to "🖊Edit this book", edit_book_path(@book) %> |
   <%= link_to "🔙Back to books", books_path %>
 
-  <p><%= button_to "Destroy this book", @book, method: :delete, class:"button"%></p>
+  <p>
+  <%= button_to "Destroy this book", @book, method: :delete, data: { "turbo-confirm": "May I delete this items from books?" }, class:"button"%>
+  </p>
 </div>

@@ -21,13 +21,13 @@ class OrdersController < ApplicationController
       end
     end
 
-    # @books.each do |book|
-    #   if book.sold_out?
-    #     redirect_to product_path(book)
-        # flash[:alert] = "This item is currently sold out and unavailable for purchase...🙇"
-      # return
-      # end
-    # end
+    @books.each do |book|
+      if book.sold_out?
+        redirect_to product_path(book)
+        flash[:alert] = "This item is currently sold out and unavailable for purchase...🙇"
+      return
+      end
+    end
   end
 
   def create
