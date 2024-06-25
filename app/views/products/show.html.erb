@@ -61,8 +61,10 @@ book-info {
 <% else %>
   <% flash.now[:alert] = "This item is currently sold out and unavailable for purchase...🙇" %>
 <% end %>
+</p>
 
-<p><%= link_to "Back to books", products_path %></p>
+<br>
+<p><%= link_to "🔙Back to books", products_path %></p>
 </body>
 </html>
 

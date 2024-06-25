@@ -9,6 +9,21 @@
 
 
   <style>
+  body {
+    display: flex;
+    min-height: 100vh; /* 画面の高さいっぱいに広げる */
+    justify-content: center; /* コンテンツを中央に配置 */
+    align-items: center; /* 縦方向にも中央に配置 */
+    /*margin: 0;*/
+    /* font-family: Arial, sans-serif;  フォントを指定 */
+    background-color: #f5f5f5; /* 背景色を指定 */
+
+    /*background-image: url('');  画像のパスを指定 */
+    /*background-size: cover; 画像をウィンドウに合わせて表示 */
+    /*background-position: center; 画像を中央に配置 */
+    /*background-repeat: no-repeat;  画像の繰り返しを禁止 */
+  }
+
   table {
     text-align: center; /* 文字を中央揃えにする */
   } 
@@ -45,54 +60,64 @@
     margin: 0 auto; /* 左右のマージンを自動設定して中央揃え */
     border: 3px solid #ccc;
   }
+
+  .container {
+    max-width: 1200px; /* コンテンツの最大幅を指定 */
+    width: 100%; /* 幅を100%に設定 */
+    padding: 0 20px; /* 左右の余白を指定 */
+    box-sizing: border-box; /* paddingが幅に含まれるようにする */
+  }
+
+  
   </style>
 </head>
 
 <body>
-  <h1>Books</h1>
+  <div class="container">
+    <h1>Books</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>📸Image</th>
-      <th>.*★📖Title*.⁺:</th>
-      <th>👤Author</th>
-      <th>⌚Publushed on</th>
-      <th>📚Status</th>
-      <th>💴Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @books.each do |book| %>
+  <table>
+    <thead>
       <tr>
-        <td>
-          <% if book.photo.attached? %>
-            <%= image_tag book.thumbnail, class:"resized-image" %>
-          <% end %>
-        </td>
-        <td class="title-header"><%= link_to book.title, product_path(book) %></td>
-        <td><%= book.author %></td>
-        <td><%= book.publushed_on %></td>
-        <td>
-          <% if book.on_sale? %>
-            <span style="color: green;">On sale</span>
-          <% elsif book.sold_out? %>
-            <span style="color: red;">Sold out</span>
-          <% end %>
-        </td>
-        <td><%= book.price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  
-  <br>
-  
-  <% if session[:cart_id] %>
-  <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
-  <% end %>
-  
+        <th>📸Image</th>
+        <th>.*★📖Title*.⁺:</th>
+        <th>👤Author</th>
+        <th>⌚Publushed on</th>
+        <th>📚Status</th>
+        <th>💴Price</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td>
+            <% if book.photo.attached? %>
+              <%= image_tag book.thumbnail, class:"resized-image" %>
+            <% end %>
+          </td>
+          <td class="title-header"><%= link_to book.title, product_path(book) %></td>
+          <td><%= book.author %></td>
+          <td><%= book.publushed_on %></td>
+          <td>
+            <% if book.on_sale? %>
+              <span style="color: green;">On sale</span>
+            <% elsif book.sold_out? %>
+              <span style="color: red;">Sold out</span>
+            <% end %>
+          </td>
+          <td><%= book.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <br>
+    
+    <% if session[:cart_id] %>
+    <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
+    <% end %>
+  </div>
 </body>
 </html>
