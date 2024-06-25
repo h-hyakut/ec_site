@@ -5,12 +5,8 @@
 }
 </style>
 
-<%= render @book %>
 
-<p>
-  <strong>タグ</strong>
-  <%= @book.tags.map(&:name).join(', ') %>
-</p>
+<%= render @book %>
 
 <div>
   <%= link_to "🖊Edit this book", edit_book_path(@book) %> |

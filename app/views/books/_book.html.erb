@@ -30,6 +30,18 @@
   <strong>👓Showing:</strong>
   <%= book.showing %>
   </p>
+
+  <p>
+  <strong>📑Tag:</strong>
+  <%= book.tags.map(&:name).join(', ') %>
+  </p>
+
+  <p>
+   <strong>Photo:</strong>
+   <% if book.photo.attached? %>
+   <%= image_tag book.thumbnail %>
+   <% end %>
+  </p>
 </div>
 
 <!-- render book -->

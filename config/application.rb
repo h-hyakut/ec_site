@@ -27,5 +27,6 @@ module EcSite
     config.time_zone = 'Tokyo'
 
     # config.generators.system_tests = nil
+    config.active_storage.variant_processor = :mini_magick
   end
 end
