@@ -26,6 +26,12 @@ book-info {
 
 
 <div class="book-info">
+  <p>
+  <% if @book.photo.attached? %>
+    <%= image_tag @book.thumbnail %>
+  <% end %>
+  </p>
+  
   <p><strong>.*★📖Title*.⁺:</strong> <%= @book.title %></p>
   <p><strong>👤Author:</strong> <%= @book.author %></p>
   <p><strong>⌚Publushed on</strong> <%= @book.publushed_on %></p>

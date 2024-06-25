@@ -26,6 +26,11 @@ th, td {
   /* ホバー時の色変更 */
 }
 
+.resized-image {
+  width: 150px; /* 幅を300pxにリサイズ */
+  height: auto; /* 高さを自動調整 */
+}
+
 </style>
 
 <table>
@@ -54,6 +59,9 @@ th, td {
           <% end %>
         </td>
         <td><%= book.price %></td>
+        <td><% if book.photo.attached? %>
+        <%= image_tag book.thumbnail, class:"resized-image" %></td>
+      <% end %>
       </tr>
     <% end %>
   </tbody>

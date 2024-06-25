@@ -11,6 +11,6 @@ class Book < ApplicationRecord
 
     has_one_attached :photo
     def thumbnail
-        photo.variant(resize_to_fill: [150, 150])
+        photo.variant(resize_to_fill: [300, 300])
       end
 end

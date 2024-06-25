@@ -5,8 +5,14 @@
 }
 </style>
 
+<p>
+  <% if @book.photo.attached? %>
+  <%= image_tag @book.thumbnail %>
+  <% end %>
+</p>
 
 <%= render @book %>
+
 
 <div>
   <%= link_to "🖊Edit this book", edit_book_path(@book) %> |
