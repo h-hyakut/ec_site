@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
 
 
   def complete
-    @order = Order.find(params[:id])
+    @orders = Order.where(params[:id])
     CompleteMailer.complete_mail(current_user).deliver
     
   end
