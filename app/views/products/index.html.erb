@@ -1,41 +1,60 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Books</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books</title>
 
 
-<style>
-table {text-align: center; # /* 文字を中央揃えにする */
- } 
-th, td {
-  padding: 8px;  # /* セルの余白を設定 */
-}
-.title-header {
-  text-align: left;
-}
+  <style>
+  table {
+    text-align: center; /* 文字を中央揃えにする */
+  } 
 
-.add {
-  background-color: #FFC896; /* パステルの黄色 (#FFF176) */
-  padding: 10px 20px; /* パディングを適切に設定 */
-  text-decoration: none; /* 下線を削除 */
-  color: black; 
-  border-radius: 5px; 
-}
+  th, td {
+    padding: 8px;   /* セルの余白を設定 */
+    border-collapse: collapse;
+    white-space: nowrap;
+  }
 
-.add:hover {
-  background-color: #FFB680; 
-  /* ホバー時の色変更 */
-}
+  .title-header {
+    text-align: left;
+    border-collapse: collapse;
+    white-space: nowrap;
+  }
 
-.resized-image {
-  width: 150px; /* 幅を300pxにリサイズ */
-  height: auto; /* 高さを自動調整 */
-}
+  .add {
+    background-color: #FFC896; /* パステルの黄色 (#FFF176) */
+    padding: 10px 20px; /* パディングを適切に設定 */
+    text-decoration: none; /* 下線を削除 */
+    color: black; 
+    border-radius: 5px; /*枠線追加*/
+  }
 
-</style>
+  .add:hover {
+    background-color: #FFB680; 
+    /* ホバー時の色変更 */
+  }
+
+  .resized-image {
+    width: 150px; /* 幅を150pxにリサイズ */
+    height: auto; /* 高さを自動調整 */
+    display: block; /* インライン要素からブロック要素に変更 */
+    margin: 0 auto; /* 左右のマージンを自動設定して中央揃え */
+    border: 3px solid #ccc;
+  }
+  </style>
+</head>
+
+<body>
+  <h1>Books</h1>
 
 <table>
   <thead>
     <tr>
+      <th>📸Image</th>
       <th>.*★📖Title*.⁺:</th>
       <th>👤Author</th>
       <th>⌚Publushed on</th>
@@ -48,6 +67,11 @@ th, td {
   <tbody>
     <% @books.each do |book| %>
       <tr>
+        <td>
+          <% if book.photo.attached? %>
+            <%= image_tag book.thumbnail, class:"resized-image" %>
+          <% end %>
+        </td>
         <td class="title-header"><%= link_to book.title, product_path(book) %></td>
         <td><%= book.author %></td>
         <td><%= book.publushed_on %></td>
@@ -59,17 +83,16 @@ th, td {
           <% end %>
         </td>
         <td><%= book.price %></td>
-        <td><% if book.photo.attached? %>
-        <%= image_tag book.thumbnail, class:"resized-image" %></td>
+        </tr>
       <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if session[:cart_id] %>
+    </tbody>
+  </table>
+  
+  <br>
+  
+  <% if session[:cart_id] %>
   <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
-<% end %>
-
+  <% end %>
+  
+</body>
+</html>

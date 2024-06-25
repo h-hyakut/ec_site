@@ -1,3 +1,11 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
 <h1>Book details</h1>
 
 <style>
@@ -23,15 +31,16 @@ book-info {
   margin-bottom: 30px;
 }
 </style>
+</head>
 
+<p>
+<% if @book.photo.attached? %>
+  <%= image_tag @book.thumbnail %>
+<% end %>
+</p>
 
 <div class="book-info">
-  <p>
-  <% if @book.photo.attached? %>
-    <%= image_tag @book.thumbnail %>
-  <% end %>
-  </p>
-  
+
   <p><strong>.*★📖Title*.⁺:</strong> <%= @book.title %></p>
   <p><strong>👤Author:</strong> <%= @book.author %></p>
   <p><strong>⌚Publushed on</strong> <%= @book.publushed_on %></p>
@@ -52,9 +61,9 @@ book-info {
 <% else %>
   <% flash.now[:alert] = "This item is currently sold out and unavailable for purchase...🙇" %>
 <% end %>
-</p>
-
 
 <p><%= link_to "Back to books", products_path %></p>
+</body>
+</html>
 
 <!-- <%= link_to "Order", new_order_path(book_id: @book.id), class:"order" %> -->
