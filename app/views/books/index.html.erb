@@ -1,5 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
+<!-- 管理者側-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,26 +7,50 @@
 <title>Books</title>
 
 <style>
+.flex-container {
+  display: flex; /* Flexbox を使用 */
+  flex-wrap: wrap; /* 要素が折り返すようにする */
+  gap: 20px; /* 要素間の間隔を設定 */
+  justify-content: space-around; /* 横方向に中央揃え */
+}
+
+.book {
+  width: calc(50% - 10px); /* 50%の幅で表示、間の余白を20px */
+  padding: 10px;
+  margin-bottom: 20px; /* 下の余白を追加 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ 
+}
+
 .button {
   font-size: 15px;
-}
-</style>
-</head>
+  }
+  </style>
+  </head>
+  
+  <body>
+  <header>
+  <div class="header-content">
+    <div class="center-section">
+      Books📚
+    </div>
+    <%= link_to "Create New book✨", new_book_path, class:"add"%>
+    </div>
+  </header>
 
-<body>
-<h1>Books</h1>
+  <div class="container">
+    <div id="books" class="flex-container">
+    <% @books.each do |book| %>
+      <div class="book">
+        <div class="book-info">
+          <%= render book %>
+        </div>
+        <div class="book-buttons">
+          <%= button_to "🔍 Show this book", book, method: :get, class: "button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-    <%= button_to "🔍Show this book", book, method: :get, class:"button" %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New book", new_book_path %>
-
- 
 </body>
 </html>
