@@ -1,33 +1,75 @@
-<p style="color: green"><%= notice %></p>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Books</title>
-
 
   <style>
   body {
-    display: flex;
-    min-height: 100vh; /* 画面の高さいっぱいに広げる */
-    justify-content: center; /* コンテンツを中央に配置 */
-    align-items: center; /* 縦方向にも中央に配置 */
-    /*margin: 0;*/
-    /* font-family: Arial, sans-serif;  フォントを指定 */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
     background-color: #f5f5f5; /* 背景色を指定 */
+  }
 
-    /*background-image: url('');  画像のパスを指定 */
-    /*background-size: cover; 画像をウィンドウに合わせて表示 */
-    /*background-position: center; 画像を中央に配置 */
-    /*background-repeat: no-repeat;  画像の繰り返しを禁止 */
+  header {
+    background-image: url('');  /*画像のパスを指定 */
+    background-size: cover; /*画像をウィンドウに合わせて表示 */
+    background-position: center; /*画像を中央に配置 */
+    background-repeat: no-repeat; /*画像の繰り返しを禁止 */
+    background-color: #f8f9fa; /* ヘッダーの背景色 */
+    padding: 10px 20px; /* 内側の余白 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影の設定 */
+    height: 80px;
+  }
+
+  /* ヘッダー内のコンテンツを配置するためのコンテナ */
+  .header-content {
+    display: flex; /* Flexbox を使用 */
+    justify-content: space-between; /* 要素を左右に均等に配置 */
+    align-items: center; /* 縦方向に中央揃え */
+  }
+
+
+  .left-section, .right-section {
+  display: flex; /* Flexbox を使用 */
+  align-items: center; /* 縦方向に中央揃え */
+  }
+
+  .center-section {
+    flex: 1; /* 中央セクションを伸ばして残りの空間を埋める */
+    text-align: center; /* 中央揃え */
+  }
+
+  /* ようこそメッセージのスタイル */
+  .welcome-message {
+    font-size: 15px; /* フォントサイズ */
+  }
+
+  .add {
+    /*background-color: #FFC896; */
+    padding: 10px 20px; /* パディングを適切に設定 */
+    text-decoration: none; /* 下線を削除 */
+    color: black; 
+    border-radius: 5px; /*角丸*/
+  }
+
+  .add:hover {
+    background-color: #FFB680; 
+    /* ホバー時の色変更 */
+  }
+
+  .my-page-link {
+  margin-right: 20px; /* マイページリンクの右側のマージン */
   }
 
   table {
     text-align: center; /* 文字を中央揃えにする */
   } 
-
+  
   th, td {
     padding: 8px;   /* セルの余白を設定 */
     border-collapse: collapse;
@@ -36,23 +78,8 @@
 
   .title-header {
     text-align: left;
-    border-collapse: collapse;
-    white-space: nowrap;
   }
-
-  .add {
-    background-color: #FFC896; /* パステルの黄色 (#FFF176) */
-    padding: 10px 20px; /* パディングを適切に設定 */
-    text-decoration: none; /* 下線を削除 */
-    color: black; 
-    border-radius: 5px; /*枠線追加*/
-  }
-
-  .add:hover {
-    background-color: #FFB680; 
-    /* ホバー時の色変更 */
-  }
-
+  
   .resized-image {
     width: 150px; /* 幅を150pxにリサイズ */
     height: auto; /* 高さを自動調整 */
@@ -60,24 +87,73 @@
     margin: 0 auto; /* 左右のマージンを自動設定して中央揃え */
     border: 3px solid #ccc;
   }
+  
+  .notification {
+    color: green;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%
+  }
 
   .container {
     max-width: 1200px; /* コンテンツの最大幅を指定 */
     width: 100%; /* 幅を100%に設定 */
     padding: 0 20px; /* 左右の余白を指定 */
     box-sizing: border-box; /* paddingが幅に含まれるようにする */
+    margin: 0 auto;
+    z-index: 1000; /* 他の要素よりも前面に表示するための設定 */
+
+    display: flex;
+    justify-content: center; /* コンテンツを中央に配置 */
+    align-items: center; /* 縦方向にも中央に配置 */
+    min-height: 100vh;  /* ブラウザの表示領域いっぱいに広げる */
   }
 
-  
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Books</h1>
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="welcome-message">
+        <% if current_user %>
+          Welcome, <%= current_user.email %> 
+        <% else %>
+          Welcome, Guest.
+      <% end %>
+    </div>
+    <div class="my-page-link">
+      <%= link_to "👤Mypage", session_path(current_user) %>
+    </div>
+  </div>
+      
+  <div class="center-section">
+    <h1>Books📚</h1>
+  </div>
 
+  <div class="right-section">
+      <% if session[:cart_id] %>
+        <div class="cart-link">
+          <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</header>
+      
+
+  <div class="notification">
+    <%= notice %>
+  </div>
+
+  <div class="container">
   <table>
-    <thead>
+
+  <thead>
       <tr>
         <th>📸Image</th>
         <th>.*★📖Title*.⁺:</th>
@@ -112,12 +188,7 @@
         <% end %>
       </tbody>
     </table>
+    </div>
     
-    <br>
-    
-    <% if session[:cart_id] %>
-    <%= link_to "Check shopping cart", cart_path(session[:cart_id]), class:"add" %>
-    <% end %>
-  </div>
 </body>
 </html>
