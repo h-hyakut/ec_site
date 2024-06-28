@@ -40,34 +40,33 @@
         <% if current_user %>
           Welcome! <%= current_user.email %> 
         <% else %>
-          Welcome, Guest.
-      <% end %>
+        <% end %>
+      </div>
+      <div class="my-page-link">
+        <%= link_to "👤 Mypage", session_path(current_user) %>
+      </div>
     </div>
-    <div class="my-page-link">
-      <%= link_to "👤Mypage", session_path(current_user) %>
-    </div>
-  </div>
       
-  <div class="center-section">
-    Books📚
-  </div>
+    <div class="center-section">
+      Books📚
+    </div>
 
-  <div class="right-section">
-      <% if session[:cart_id] %>
-        <div class="add">
-          <%= link_to "Check shopping cart", cart_path(session[:cart_id])%>
-        </div>
-      <% end %>
+    <div class="right-section">
+        <% if session[:cart_id] %>
+          <div class="add">
+            <%= link_to "Check shopping cart", cart_path(session[:cart_id])%>
+          </div>
+        <% end %>
     </div>
   </div>
 </header>
       
-
   <div class="notification">
     <%= notice %>
   </div>
 
-  <div class="container">
+
+<div class="container">
   <table>
   <thead>
       <tr>
@@ -104,7 +103,7 @@
         <% end %>
       </tbody>
     </table>
-    </div>
+  </div>
     
 </body>
 </html>

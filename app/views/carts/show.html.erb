@@ -39,6 +39,19 @@
     font-weight: bold;
   }
 
+  .delete {
+  background-color: transparent;
+  padding: 10px 20px; /* パディングを適切に設定 */
+  text-decoration: none; /* 下線を削除 */
+  color: black; 
+  border-radius: 5px; /*角丸*/
+}
+
+  .delete:hover {
+    background-color: #f36b53; 
+    /* ホバー時の色変更 */
+  }
+
 </style>
 </head>
 
@@ -46,14 +59,17 @@
 <body>
   <header>
     <div class="header-content">
+      <div class="left-section">
+        <%= link_to "Books📚", products_path %>
+      </div>
+
       <div class="center-section">
-        Cart
+        Cart🛒
       </div>
-      <div>
-      <%= link_to "Books📚", products_path %>
+  
+      <div class="right-section">
+        <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" }, class: "delete" %>
       </div>
-    <div>
-      <%= link_to "Clear the shopping cart.", @cart, data: { "turbo-method": :delete, "turbo-confirm": "May I delete all items from your shopping cart?" },class:"delete" %>
     </div>
   </header>
 
@@ -83,15 +99,15 @@
       <p>📚 Quantity of orders: <%= @current_cart.total_number %><span> items</span></p>
       <p>💴 Total price:￥<%= @current_cart.total_price %>(Including tax)</p>
     </div>
+  <% end %>
 
-    <div class="center-section"> 
+    <div class="center"> 
     <% if @line_items.count == 0 %>
-        <strong>Your shopping cart is empty🛒…</strong>
+        <strong>Your shopping cart is empty…</strong>
     <% else %>
       <%= link_to "Order🛒=3", new_order_path, class:"add" %>
     <% end %>
     </div>
-  <% end %>
   </div>
 </body>
 </html>
