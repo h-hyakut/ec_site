@@ -13,12 +13,16 @@
   color: black; 
   border-radius: 5px; 
   border: none;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .link:hover {
   background-color: #FFEB3B; 
   /* ホバー時の色変更 */
+}
+
+.under {
+  font-size: 15px;
 }
 </style>
 </head>
@@ -60,12 +64,17 @@
       <%= form.text_field :address %>
     </div>
 
-    <p>
+    <br>
       <div class="actions">
         <%= form.submit "Proceed to the next step.", class: "link" %>
       </div>
-    </p>
+
   <% end %>
+
+  <br>
+  <div class="under">
+  <%= link_to "Back to shopping cart", cart_path(session[:cart_id])%>
+  </div>
 </div>
 
 </body>

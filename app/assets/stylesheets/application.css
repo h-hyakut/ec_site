@@ -88,7 +88,7 @@ th, td {
 }
 
 .notification {
-  color: green;
+  color: #3ebba0;
   text-align: center;
   padding: 10px;
   position: fixed;
@@ -98,6 +98,7 @@ th, td {
   background-color: #ffffff;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* 下向きの影を追加 */
   z-index: 1000; /* 他の要素よりも前面に表示 */
+  font-size: 18px;
 }
 
 .container {
@@ -161,6 +162,11 @@ th, td {
   margin-bottom: 5px; /* ラベル間に余白を追加 */
 }
 
-
+.under {
+  display: flex; /* Flexbox を使用 */
+  justify-content: center;
+  align-items: center; /* 縦方向に中央揃え */
+  font-size: 20px;
+}
 
 
