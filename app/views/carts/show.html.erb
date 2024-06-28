@@ -96,8 +96,8 @@
     </table>
 
     <div class="total-section">
-      <p>📚 Quantity of orders: <%= @current_cart.total_number %><span> items</span></p>
-      <p>💴 Total price:￥<%= @current_cart.total_price %>(Including tax)</p>
+      <p><strong>📚 Quantity of orders: <%= @current_cart.total_number %><%= "item".pluralize(@current_cart.total_number) %></strong></p>
+      <strong>💴 Total price:￥<%= @current_cart.total_price %>(Including tax)</strong>
     </div>
   <% end %>
 

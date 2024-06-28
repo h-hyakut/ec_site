@@ -5,30 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mypage</title>
 
-<style></style>
+<style>
+  .mypage {
+    display: flex; /* Flexbox を使用 */
+    justify-content: center;
+    align-items: center; /* 縦方向に中央揃え */
+    font-size: 30px;
+  }
+  .under {
+    display: flex; /* Flexbox を使用 */
+    justify-content: center;
+    align-items: center; /* 縦方向に中央揃え */
+    font-size: 20px;
+  }
+</style>
 <body>
   <header>
-  <div class="header-content">
     <div class="left-section">
     <%= link_to "Books📚", products_path %>
     </div>
-  
-    <div class="center-section">
-      Mypage
-    </div>
-
-    <div class="right-section">
-      <%= link_to "log out", destroy_user_session_path, data: { turbo_method: :delete } %>
-    </div>
-  </div>
   </header>
-  
-  <table class="table">
-  <thead>
-  <div class="center">
-    This is your page.
+    
+  <div class="centered-box">
+    <div class="mypage">Mypage</div>
+    <div class="center">
+    <p>This is your page.
     <br>
-    Your mail adress is "<%= current_user.email %>"
+    Your email address is "<%= current_user.email %>"
+    </p>
+    </div>
+    <br>
+    <div class="under">
+    <%= link_to "log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+    </div>
   </div>
 </body>
 </html>

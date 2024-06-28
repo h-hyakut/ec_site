@@ -1,69 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<body>
-<h1>Book details</h1>
-
-<style>
-.book-info p {
+  
+  <style>
+  .book-info p {
     margin: 5px 0; 
   }
+  
+  .add {
+    background-color: #FFC896; /* パステルの黄色 (#FFF176) */
+    padding: 10px 20px; /* パディングを適切に設定 */
+    text-decoration: none; /* 下線を削除 */
+    color: black; 
+    border-radius: 5px; 
+    # display: inline-block;
+    # cursor: pointer;
+  }
+  
+  .add:hover {
+    background-color: #FFB680; 
+  }
+  </style>
+  </head>
+  
+<body>
+  <header>
+    <div class="header-content">
+      <div class="center-section">
+      Book details
+      </div>
+    </div>
+  </header>
+    
+  <table class="table">
+    <div class="center">
+    <thead>
+      <tr>
+      <th><strong>📸Image</strong></th>
+      <th><strong>.*★📖Title*.⁺:</strong></th>
+      <th><strong>👤Author:</strong></th>
+      <th><strong>⌚Publushed on</strong></th>
+      <th><strong>📚Status:</strong>
+      <th><strong>💴Price:</strong></th>
+    </thead>
 
-.add {
-  background-color: #FFC896; /* パステルの黄色 (#FFF176) */
-  padding: 10px 20px; /* パディングを適切に設定 */
-  text-decoration: none; /* 下線を削除 */
-  color: black; 
-  border-radius: 5px; 
-  # display: inline-block;
-  # cursor: pointer;
-}
+    <tbody>
+      <tr>
+      <td><% if @book.photo.attached? %>
+          <%= image_tag @book.thumbnail %>
+          <% end %>
+      </td>
+      <td><%= @book.title %></td>
+      <td><%= @book.author %></td>
+      <td><%= @book.publushed_on %></td>
+      <td>
+      <% if @book.on_sale? %>
+        <span style="color: green;">On sale</span>
+      <% elsif @book.sold_out? %>
+        <span style="color: red;">Sold out</span>
+      <% end %>
+      </td>
+      <td><%= @book.price %></td>
+    </tbody>
+    </div>
+  </table>
 
-.add:hover {
-  background-color: #FFB680; 
-}
-
-book-info {
-  margin-bottom: 30px;
-}
-</style>
-</head>
-
-<p>
-<% if @book.photo.attached? %>
-  <%= image_tag @book.thumbnail %>
-<% end %>
-</p>
-
-<div class="book-info">
-
-  <p><strong>.*★📖Title*.⁺:</strong> <%= @book.title %></p>
-  <p><strong>👤Author:</strong> <%= @book.author %></p>
-  <p><strong>⌚Publushed on</strong> <%= @book.publushed_on %></p>
-  <p><strong>📚Status:</strong>
+  <div class="center">
     <% if @book.on_sale? %>
-      <span style="color: green;">On sale</span>
-    <% elsif @book.sold_out? %>
-      <span style="color: red;">Sold out</span>
+      <%= link_to "Add to cart🛒=3", line_items_path(book_id: @book.id),
+      data: {"turbo-method": :post}, class: "add" %>
+    <% else %>
+      <% flash.now[:alert] = "This item is currently sold out and unavailable for purchase...🙇" %>
     <% end %>
-  </p>
-  <p><strong>💴Price:</strong> <%= @book.price %></p>
-</div>
+  </div>
 
-<p>
-<% if @book.on_sale? %>
-  <%= link_to "Add to cart🛒=3", line_items_path(book_id: @book.id),
-  data: {"turbo-method": :post}, class: "add" %>
-<% else %>
-  <% flash.now[:alert] = "This item is currently sold out and unavailable for purchase...🙇" %>
-<% end %>
-</p>
-
-<br>
-<p><%= link_to "🔙Back to books", products_path %></p>
+  <div class="left-section">
+  <%= link_to "🔙Back to books", products_path %>
+  </div>
 </body>
 </html>
 

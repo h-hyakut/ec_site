@@ -1,16 +1,9 @@
-<h1>Order🐧</h1>
-
-<%= form_with(model: @order, local: true, url: confirm_orders_path, method: :get) do |form| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-      <ul>
-        <% @order.errors.each do |error| %>
-          <li><%= error.full_message%></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order🐧</title>
 
 <style>
 .link {
@@ -28,30 +21,53 @@
   /* ホバー時の色変更 */
 }
 </style>
+</head>
 
-<% @books.each do |book|%>
-<strong>📖Title:<%= book.title %></strong>
+<body>
+<div class="centered-box">
+  <h1>Order🐧</h1>
 
-  <div class="field">
-    <%= form.label :・count %>
-    <%= form.text_field :count, name: "order[count][]", value: LineItem.find_by(cart_id: @current_cart, book_id: book).quantity %>
-  </div>
+  <%= form_with(model: @order, local: true, url: confirm_orders_path, method: :get) do |form| %>
+    <% if @order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+        <ul>
+          <% @order.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  
-  <div class="field">
-  <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
-  </div>
-  
-<% end %>
-<br>
-  <div class="field">
-    <%= form.label :📧address %>
-    <%= form.text_field :address %>
-  </div>
+    <% @books.each do |book| %>
+      <strong>📖Title:<%= book.title %></strong>
 
-  <p>
-  <div class="actions">
-    <%= form.submit "Proceed to the next step.", class:"link" %>
-  </div>
-  </p>
-<% end %>
+      <div class="field">
+        <%= form.label :count %>
+        <%= form.text_field :count, name: "order[count][]", value: LineItem.find_by(cart_id: @current_cart, book_id: book).quantity %>
+      </div>
+
+      <div class="field">
+        <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
+      </div>
+      
+    <% end %>
+
+    <br>
+
+    <div class="field">
+      <%= form.label :address %>
+      <%= form.text_field :address %>
+    </div>
+
+    <p>
+      <div class="actions">
+        <%= form.submit "Proceed to the next step.", class: "link" %>
+      </div>
+    </p>
+  <% end %>
+</div>
+
+</body>
+</html>
+

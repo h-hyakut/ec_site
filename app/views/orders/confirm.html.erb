@@ -1,7 +1,16 @@
-<h1>☑Confirmation</h1>
-  <p>🐱<[Please, confirm your order.]</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmation</title>
 
 <style>
+.coment {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
 .link {
   background-color: #B2EBF2; /* パステルの黄色 (#FFF176) */
   padding: 10px 20px; /* パディングを適切に設定 */
@@ -17,63 +26,70 @@
   /* ホバー時の色変更 */
 }
 </style>
-  
 
-<%= form_with(model: @order, local: true) do |form| %>
-  <% if @order.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this article from being saved:</h2>
+</head>
+<div class="centered-box">
+<h1>☑Confirmation</h1>
+<h3 class="coment">🐱<[Please, confirm your order.]</h3>
 
-        <ul>
-          <% @order.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-          <% end %>
-        </ul>
+  <div class="center">
+  <%= form_with(model: @order, local: true) do |form| %>
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+          <ul>
+            <% @order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <% @books.each do |book|%>
+      <div class="field">
+      <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
       </div>
-  <% end %>
+    <% end %>
+
+    <div class="field">
+    <%= form.hidden_field :count, value: @current_cart.total_number, name: "order[count][]" %>
+    </div>
 
 
-<% @books.each do |book|%>
-  <div class="field">
-  <%= form.hidden_field :book_ids, value: book.id, name: "order[book_ids][]" %>
-  </div>
-<% end %>
+    <% @line_items.each do |line_item| %>
+      <% book = line_item.book %>
+      <div>
+        <p>📖 Title: <%= book.title %></p>
+        <p>◆ Quantity: <%= line_item.quantity %>items</p>
+        <p>
+          💰 Price: ￥<%= line_item.item_total_price %>
+          <span>(Including tax)</span>
+        </p>
+      </div>
+    <% end %>
 
-  <div class="field">
-  <%= form.hidden_field :count, value: @current_cart.total_number, name: "order[count][]" %>
-  </div>
+    <br>
+    <strong>
+    <div class="total-section">
+        <p>📚 Quantity of orders: <%= @current_cart.total_number %><%= "item".pluralize(@current_cart.total_number) %></p>
+        💴 Total price: ￥<%= @current_cart.total_price %>(Including tax)
+    </div>
+    </strong>
 
-
-  <% @line_items.each do |line_item| %>
-    <% book = line_item.book %>
-    <div>
-      <p>📖<%= book.title %></p>
-      <p>・<%= line_item.quantity %>items</p>
-      <p>
-        💰￥<%= line_item.item_total_price %>
-        <span>(Including tax)</span>
-      </p>
+    <br>
+    <div class="field" style="display: inline-block;">
+      <%= form.label :address %>
+      <%= @order.address %>
+      <%= form.hidden_field :address %>
+    </div>
+        
+    <div class="actions">
+      <%= form.submit "Confirm your order.",class:"link" %>
     </div>
   <% end %>
-
-  <strong>
-  <div>
-    <p>📚 Quantity of orders: <%= @current_cart.total_number %><span> items</span></p>
-    <p>
-      💴 Total price:￥<%= @current_cart.total_price %>
-      <span>(Including tax)</span>
-    </p>
-  </div>
-  </strong>
-
-  <div class="field">
-    <p><%= form.label :address %></p>
-    <%= @order.address %>
-    <%= form.hidden_field :address %>
-  </div>
-      
-  <div class="actions">
-    <%= form.submit "Confirm your order." %>
-  </div>
-
-<% end %>
+</div>
+</div>
+</body>
+</html>
