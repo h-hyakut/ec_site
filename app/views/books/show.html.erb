@@ -21,6 +21,16 @@
   max-width: 600px; /* 最大幅を設定 */
   }
 
+
+    
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    background-color: #f5f5f5; /* 背景色を指定 */
+    font-size: 15px;
+  }
 </style>
 
 <body>
@@ -50,4 +60,7 @@
   <%= button_to "Destroy this book", @book, method: :delete, data: { "turbo-confirm": "May I delete this items from books?" }, class:"button"%>
   </p>
 </div>
+
+</body>
+</html>
 

@@ -1,10 +1,50 @@
-<h1>✒Editing book</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<style>
+.centered-box2 {
+  position: fixed; /* 画面上に固定 */
+  top: 50%; /* 上端を画面の中央に */
+  left: 50%; /* 左端を画面の中央に */
+  transform: translate(-50%, -50%); /* 中央揃え */
+  padding: 20px; /* 内側の余白 */
 
-<%= render "form", book: @book %>
+  width: 80%; /* 幅を80%に設定 */
+  max-width: 600px; /* 最大幅を設定 */
+  }
 
-<div>
-  <p>
-  <%= link_to "🔍Show this book", @book %> |
-  <%= link_to "🔙Back to books", books_path %>
-  </p>
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    background-color: #f5f5f5; /* 背景色を指定 */
+    font-size: 15px;
+  }
+
+</style>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="center-section">
+        ✒Editing book
+      </div>
+    </div>
+  </header>
+
+  <div class="centered-box2">
+
+  <%= render "form", book: @book %>
+
+  <div>
+    <p>
+    <%= link_to "🔍Show this book", @book %> |
+    <%= link_to "🔙Back to books", books_path %>
+    </p>
+  </div>
 </div>
+</body>
+</html>
